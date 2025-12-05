@@ -313,8 +313,256 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
       </p>
       <br />
       <br />
-
-      {/* ... (Previous additional images omitted for brevity, add back if needed) ... */}
+ <div className="caption-wrapper">
+              <div className="caption-text">
+                O3, 2021
+                <br />
+                <br /> Electrical transformer, glass, real rose,
+                <br />
+                <br /> Ozone scent
+                <br />
+                <br /> winner of the Jury Special Prize and Public Choice Award
+                <br />
+                <br /> Contemporary Art Center, CAC - Vilnius
+              </div>
+              <div
+                className="caption-image"
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "space-between",
+                }}
+              >
+                <img
+                  src="/Lightning Rose 1.jpg"
+                  alt="Lightning Rose 1"
+                  style={{
+                    width: "48%",
+                    marginBottom: "10px",
+                    display: "block",
+                  }}
+                />
+                <img
+                  src="/Lightning Rose 2.jpg"
+                  alt="Lightning Rose 2"
+                  style={{
+                    width: "48%",
+                    marginBottom: "10px",
+                    display: "block",
+                  }}
+                />
+                <img
+                  src="/Lightning Rose 3.jpg"
+                  alt="Lightning Rose 3"
+                  style={{
+                    width: "48%",
+                    display: "block",
+                  }}
+                />
+                <img
+                  src="/Lightning Rose 4.jpg"
+                  alt="Lightning Rose 4"
+                  style={{
+                    width: "48%",
+                    display: "block",
+                  }}
+                />
+              </div>
+            </div>
+            <br />
+            <div className="caption-wrapper">
+              <div className="caption-text">
+                Ibbur, 2025 <br />
+                <br /> glass, helium, argon, metal <br />
+                <br /> with Yuma Burgess <br />
+                <br /> Saatchi Gallery
+              </div>
+              <div
+                className="caption-image"
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "space-between",
+                }}
+              >
+                <img
+                  src="/Ibbur 17.jpg"
+                  alt="Ibbur 17"
+                  style={{
+                    width: "48%",
+                    marginBottom: "10px",
+                    display: "block",
+                  }}
+                />
+                <img
+                  src="/Ibbur 18.jpg"
+                  alt="Ibbur 18"
+                  style={{
+                    width: "48%",
+                    marginBottom: "10px",
+                    display: "block",
+                  }}
+                />
+                <img
+                  src="/Ibbur 21.jpg"
+                  alt="Ibbur 21"
+                  style={{
+                    width: "48%",
+                    display: "block",
+                  }}
+                />
+                <img
+                  src="/Ibbur 24.jpg"
+                  alt="Ibbur 24"
+                  style={{
+                    width: "48%",
+                    display: "block",
+                  }}
+                />
+              </div>
+            </div>
+            <br />
+            “Ibbur”, draws from Kabbalistic tradition, where ibbur -
+            “impregnation” - names a benevolent possession in which an
+            ancestor’s soul temporarily inhabits the living to offer guidance,
+            suggesting that identity is shaped not only by personal experience
+            but by the spirits and intelligences we invite in. As we open
+            ourselves to external forces, both spiritual and artificial, it
+            gently wonders whether we remain agents of our own becoming or are
+            slowly becoming vessels for futures that script our consciousness.
+            <br />
+            <br />
+            <div className="caption-wrapper">
+              <div className="caption-text">
+                Scented Trip, book & absolute 2019-2022 <br />
+                <br /> book and brugmansia absolute, 3ml
+              </div>
+              <div
+                className="caption-image"
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "space-between",
+                }}
+              >
+                <img
+                  src="/web-scented_trip 2.jpg"
+                  alt="Scented Trip 2"
+                  style={{
+                    width: "48%",
+                    marginBottom: "10px",
+                    display: "block",
+                  }}
+                />
+                <img
+                  src="/web-scented_trip 1.jpg"
+                  alt="Scented Trip 1"
+                  style={{
+                    width: "48%",
+                    marginBottom: "10px",
+                    display: "block",
+                  }}
+                />
+                <img
+                  src="/Scented Trip.jpg"
+                  alt="Scented Trip Main"
+                  style={{
+                    width: "48%",
+                    display: "block",
+                  }}
+                />
+                <img
+                  src="/Brugmancia RE.jpg"
+                  alt="Brugmancia"
+                  style={{
+                    width: "48%",
+                    display: "block",
+                  }}
+                />
+              </div>
+            </div>
+            <br />
+            This book and accompanying scent broach the topics of perception of
+            authenticity and collective hallucinations. Comprising photographic
+            material and documentation taken during travels to Kilimanjaro and
+            the Himalayas, Scented Trip explores phenomena of loss of self, for
+            example during carnivals, folkloric events, and rituals involving
+            mask-wearing and meditative “chams” and similar dances.
+            web-scented_trip 2.jpg web-scented_trip 1.jpg Scented Trip.jpg
+            Brugmancia RE.jpg In one defining moment of the work, whilst
+            traveling at the foothills of Kilimanjaro, I met a local man who
+            invited her to smell a giant, hypnotic white flower. This inhalation
+            led to intense hallucinations involving ants, as she stood in the
+            middle of the rainforest. The flower in question, officially named
+            Brugmansia, is used locally for its hallucinogenic, and seemingly
+            unpleasant, effect. However it must be noted that, while sinister at
+            first glance, the hallucinations are reported to be controllable by
+            the user—with time and practice, frightening insects from “the
+            underworld” can even be revisited and tamed by those who conjure
+            them. Alongside visual documentation, Scented Trip exists as a
+            scent: a 3 ml droplet is extracted using the enfleurage method,
+            making Brugmansia absolute the main note in the perfume. This work
+            therefore also comprises a wearable but hypnotic, poisonous, and
+            literally narcotic, perfume.
+            <br />
+            <br />
+            <div className="caption-wrapper">
+              <div className="caption-text">
+                Sun’s surface, 2023 <br />
+                <br /> 3D video, LCD screen, convex glass lens, stainless steel{" "}
+                <br />
+                <br /> with Jurgis Lietunovas <br />
+                <br /> Milan Design Week & Observatory of Ideas, Vilnius
+              </div>
+              <img
+                src="/SunsSurface-min.jpeg"
+                alt="Sun's Surface"
+                className="caption-image"
+              />
+            </div>
+            <img
+              src="/Web-Pola-Scan-22.jpg"
+              alt="Sun's Surface"
+              className="caption-image"
+            />
+            <br />
+            <img
+              src="/Web-Pola-Scan-23.jpg"
+              alt="Image-6"
+              className="responsive-image"
+            />
+            <br />
+            <img
+              src="/Web-Print 4.jpg"
+              alt="Image-6"
+              className="responsive-image"
+            />
+            <br />
+            <img
+              src="/Web-Print 12.jpg"
+              alt="Image-6"
+              className="responsive-image"
+            />
+            <br />
+            <img
+              src="/web-conductive 1.jpg"
+              alt="Image-6"
+              className="responsive-image"
+            />
+            <br />
+            <img
+              src="/Lightning Rose RE.jpg"
+              alt="Image-6"
+              className="responsive-image"
+            />
+            <br />
+            <img
+              src="/Helium Burning CU RE.jpg"
+              alt="Image-6"
+              className="responsive-image"
+            />
+            <br />
+            <br />
 
       {/* --- CONTACT SECTION --- */}
       <p id="CONTACT" ref={(el) => (sectionRefs.current["CONTACT"] = el)}></p>

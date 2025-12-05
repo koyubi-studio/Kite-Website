@@ -588,7 +588,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
   <h3>Request &amp; Purchase</h3>
 
   <form
-    action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT"
+    action="https://formspree.io/f/xnnezlde"
     method="POST"
     className="contact-form"
   >

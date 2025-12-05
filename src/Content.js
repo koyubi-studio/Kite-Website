@@ -584,31 +584,32 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
       <br />
       <br />
 
-      {/* --- FORM IMPLEMENTATION --- */}
-      <div className="contact-form">
-        <h3 style={{ marginBottom: "20px", fontWeight: 500 }}>
-          Request & Purchase
-        </h3>
+  {/* --- FORM IMPLEMENTATION --- */}
+  <h3>Request &amp; Purchase</h3>
 
-        <label>Name</label>
-        <input type="text" className="contact-input" placeholder="Your Name" />
+  <form
+    action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT"
+    method="POST"
+    className="contact-form"
+  >
+    <label>
+      Name
+      <input type="text" name="name" required />
+    </label>
 
-        <label>Email</label>
-        <input
-          type="email"
-          className="contact-input"
-          placeholder="Your Email"
-        />
+    <label>
+      Email
+      <input type="email" name="email" required />
+    </label>
 
-        <label>Message</label>
-        <textarea
-          className="contact-textarea"
-          rows={4}
-          placeholder="Your inquiry..."
-        ></textarea>
+    <label>
+      Message
+      <textarea name="message" rows="4" required />
+    </label>
 
-        <button className="contact-button">Submit</button>
-      </div>
+    <button type="submit">Send</button>
+  </form>
+</section>
 
       <br />
       <br />

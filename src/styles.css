@@ -8,6 +8,10 @@
 }
 
 /* --- FORM STYLING --- */
+.contact-block {
+  max-width: 520px;     /* ← .bio-text と同じくらいの幅に */
+  margin-top: 20px;
+}
 
 .contact-form {
   display: flex;
@@ -59,3 +63,5 @@
   background: black;
   color: white;
 }
+
+

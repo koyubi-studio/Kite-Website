@@ -593,7 +593,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         <br />
 
         {/* --- FORM IMPLEMENTATION --- */}
-        <h3>Request &amp; Purchase</h3>
+        Request &amp; Purchase
 
         <form
           action="https://formspree.io/f/xnnezlde" // ←ここはそのままでOK

@@ -11,6 +11,9 @@
 .contact-block {
   max-width: 520px;     /* ← .bio-text と同じくらいの幅に */
   margin-top: 20px;
+    margin-left: auto;  /* Push from left */
+  margin-right: auto; /* Push from right (centers the block) */
+  text-align: left; 
 }
 
 .contact-form {

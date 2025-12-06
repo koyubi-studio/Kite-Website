@@ -567,7 +567,6 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         ref={(el) => (sectionRefs.current["CONTACT"] = el)}
         className="content-section"
       >
-        {/* ROW 1: BIO TEXT & IMAGE */}
         <div className="bio-wrapper" style={{ alignItems: "flex-start" }}>
           <div className="bio-text">
             Emilija Povilanskaite is a visual artist and film director. Her work
@@ -585,19 +584,22 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
             className="bio-image"
           />
         </div>
-        
+
         <br />
 
-        {/* ROW 2: CONTACT FORM (Independent, Centered, Main Paragraph Width) */}
-        <div 
-            className="contact-block" 
-            style={{ 
-                marginLeft: "auto", 
-                marginRight: "auto", 
-                width: "100%" 
-            }}
+        {/* --- CONTACT FORM --- */}
+        {/* Forces the block to the center (auto margins) but keeps internal text aligned left */}
+        <div
+          className="contact-block"
+          style={{
+            maxWidth: "520px",
+            margin: "20px auto",
+            textAlign: "left",
+            width: "100%",
+          }}
         >
           <p className="contact-heading">Request &amp; Purchase</p>
+
           <form
             action="https://formspree.io/f/xnnezlde"
             method="POST"
@@ -607,14 +609,17 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
               Name
               <input type="text" name="name" required />
             </label>
+
             <label>
               Email
               <input type="email" name="email" required />
             </label>
+
             <label>
               Message
               <textarea name="message" rows="4" required></textarea>
             </label>
+
             <button type="submit">Send</button>
           </form>
         </div>

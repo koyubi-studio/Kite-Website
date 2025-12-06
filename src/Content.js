@@ -71,6 +71,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         <br />
         <br />
         STATIC ELECTRICITY <br />
+            <br />
         Static Electricity is a moment caught mid-charge - the air just before
         lightning touches glass. In the split second before lightning strikes,
         the air changes - ions leap, and the sky tastes faintly metallic. Static
@@ -84,6 +85,8 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         </span>
       </p>
       <br />
+          <br />
+          <br />
       <div
         style={{
           display: "flex",
@@ -128,7 +131,6 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         of light. Inside, I compose the fragrance from the finest raw materials,
         blended and bottled in-house.
       </p>
-      <br />
       <br />
       <br />
       <img
@@ -190,7 +192,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         atmosphere. Each piece holds its own microclimate: ozone sharpening the
         air around a rose, vegetal traces of grass and moss suspended in glass,
         notes that suggest downed power lines or the distant heat of a star.
-        <br />
+        
         <br />
         <br />
         <img
@@ -237,11 +239,6 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         <br />
         <br />
         <br />
-        “Grass Render” (scent, lass, krypton, argon) uses sensory narrative to
-        explore our entangled relationship with plants. The work suspends
-        fragrances of grass, moss, wood and soil in glass vessels filled with
-        krypton and argon, tracing the quiet magic of natural elements as they
-        move into air.
         <br />
         <br />
         <br />
@@ -258,6 +255,13 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
             className="caption-image"
           />
         </div>
+         <br />
+         <br />
+        “Grass Render” (scent, lass, krypton, argon) uses sensory narrative to
+        explore our entangled relationship with plants. The work suspends
+        fragrances of grass, moss, wood and soil in glass vessels filled with
+        krypton and argon, tracing the quiet magic of natural elements as they
+        move into air.
         <br />
         <br />
         <br />
@@ -283,6 +287,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         unseen forces that both nurture and protect.
         <br />
         <br />
+          <br />
         <div className="caption-wrapper">
           <div className="caption-text">
             <br />
@@ -312,6 +317,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         eventual annihilation on re-entry.
       </p>
       <br />
+          <br />
       <br />
  <div className="caption-wrapper">
               <div className="caption-text">
@@ -369,7 +375,26 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
                 />
               </div>
             </div>
-            <br />
+<br />
+                  <br />
+                
+                  “O3” is a molecule that eliminates other odours around, often used for air purification.
+However, when employed at a strong enough concentration, it can exterminate living
+organisms.This installation invites visitors to experience a perceptible olfactory
+change: a bolt of lightning strikes the rose encased within the glass box, and the crisp
+floral scent gives way to hints of copper—as one would smell when nasal blood vessels are
+damaged. Extremely sweet notes appear, and signals are sent to the brain, warning of the
+smell of blood. Despite the work’s mesmerising quality and sheer beauty, the electric
+discharge and the release of O3 can act as dangerous tool for destroying fragile life.
+Part mise-en-scene, part reality, this installation instills both intrigue and discomfort
+in viewers.
+While the chemical and electrical reactions happen safely within the glass box, an
+artificial (and harmless) scent is diffused into the room, awakening a sense of innate
+panic in the viewer, therefore toying with the idea of the institution as a safe space.
+            
+  <br />
+  <br />
+  <br />
             <div className="caption-wrapper">
               <div className="caption-text">
                 Ibbur, 2025 <br />
@@ -432,6 +457,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
             slowly becoming vessels for futures that script our consciousness.
             <br />
             <br />
+              <br />
             <div className="caption-wrapper">
               <div className="caption-text">
                 Scented Trip, book & absolute 2019-2022 <br />
@@ -507,6 +533,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
             literally narcotic, perfume.
             <br />
             <br />
+              <br />
             <div className="caption-wrapper">
               <div className="caption-text">
                 Sun’s surface, 2023 <br />

@@ -488,8 +488,9 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
             the Himalayas, Scented Trip explores phenomena of loss of self, for
             example during carnivals, folkloric events, and rituals involving
             mask-wearing and meditative “chams” and similar dances.
-            web-scented_trip 2.jpg web-scented_trip 1.jpg Scented Trip.jpg
-            Brugmancia RE.jpg In one defining moment of the work, whilst
+            <br />
+            <br />
+            In one defining moment of the work, whilst
             traveling at the foothills of Kilimanjaro, I met a local man who
             invited her to smell a giant, hypnotic white flower. This inhalation
             led to intense hallucinations involving ants, as she stood in the

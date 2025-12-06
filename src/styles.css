@@ -1,89 +1,65 @@
-/* Add this to style.css */
-
-/* --- GENERAL IMAGE UTILS --- */
-.responsive-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin-bottom: 20px;
+@font-face {
+  font-family: "Victor Mono Medium";
+  src: url('./fonts/VictorMono-Medium.woff') format('woff');
+}
+@font-face {
+  font-family: "Victor Mono Regular";
+  src: url('./fonts/VictorMono-Regular.woff') format('woff');
 }
 
-.large-image {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* --- CAPTIONS (Image left/right text) --- */
-.caption-wrapper {
-  display: flex;
-  flex-direction: row; /* Default to row */
-  justify-content: space-between;
-  align-items: flex-start;
+/* --- FORM STYLING --- */
+.contact-block {
+  max-width: 520px;     /* ← .bio-text と同じくらいの幅に */
   margin-top: 20px;
-  margin-bottom: 20px;
-  gap: 20px;
 }
 
-.caption-text {
-  flex: 1; /* Takes up available space */
-  padding-right: 20px;
-}
-
-.caption-image {
-  flex: 1;
-  width: 100%; /* Be careful here, flex handles the width */
-  max-width: 50%; /* Keeps it from taking over */
-  height: auto;
-  display: block;
-}
-
-/* --- BIO SECTION --- */
-.bio-wrapper {
+.contact-form {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.bio-text {
-  flex: 1;
+  flex-direction: column;
+  gap: 28px; 
+  max-width: 100%; 
+  margin-top: 20px;
+  font-family: inherit;
+  font-size: 12px;
   text-align: left;
 }
 
-.bio-image {
-  width: 40%; /* Adjust size as needed */
-  height: auto;
-  display: block;
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-/* --- RESPONSIVE MOBILE FIXES --- */
-/* You need this to stack things on mobile screens */
-@media (max-width: 768px) {
-  .caption-wrapper,
-  .bio-wrapper {
-    flex-direction: column;
-  }
-  
-  .caption-image,
-  .bio-image {
-    max-width: 100%;
-    width: 100%;
-    margin-top: 20px;
-  }
-  
-  .caption-text {
-    padding-right: 0;
-  }
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 6px 2px;
+  border: none;
+  border-bottom: 1px solid black;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+  outline: none;
 }
 
-.special-font {
-  font-family: "Victor Mono Medium", monospace;
-  font-size: 0.9em;
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-bottom: 1px solid #444;
 }
 
-.contact-heading {
-  font-family: "Victor Mono Medium", monospace;
-  font-size: 1.1em;
-  margin-bottom: 10px;
+.contact-form button {
+  align-self: flex-start;
+  padding: 8px 18px;
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.contact-form button:hover {
+  background: black;
+  color: white;
 }

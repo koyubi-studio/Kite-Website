@@ -567,7 +567,8 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         ref={(el) => (sectionRefs.current["CONTACT"] = el)}
         className="content-section"
       >
-        <div className="bio-wrapper">
+        {/* Added alignItems: 'flex-start' here to fix the image position */}
+        <div className="bio-wrapper" style={{ alignItems: "flex-start" }}>
           <div className="bio-text">
             Emilija Povilanskaite is a visual artist and film director. Her work
             - rooted in storytelling - is multifaceted, connecting technology,
@@ -578,8 +579,8 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
             multiple senses, she develops innovative interfaces between
             technology, imagination, and embodied human experience.
             
-            {/* --- FORM MOVED HERE --- */}
-            <div className="contact-block">
+            {/* --- FORM NESTED HERE --- */}
+            <div className="contact-block" style={{ width: "100%" }}>
               <p className="contact-heading">Request &amp; Purchase</p>
               <form
                 action="https://formspree.io/f/xnnezlde"
@@ -601,8 +602,8 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
                 <button type="submit">Send</button>
               </form>
             </div>
-            
           </div>
+
           <img
             src="/Ibbur 31.jpg"
             alt="Emilija Portrait"

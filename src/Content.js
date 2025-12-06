@@ -566,51 +566,59 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
             <br />
 
       {/* --- CONTACT SECTION --- */}
-      <p id="CONTACT" ref={(el) => (sectionRefs.current["CONTACT"] = el)}></p>
-      <br />
-      <br />
-      <div className="bio-wrapper">
-        <div className="bio-text">
-          Emilija Povilanskaite is a visual artist and film director. Her work -
-          rooted in storytelling - is multifaceted, connecting technology,
-          science, research and olfactory design, exploring how digital worlds
-          reshape human perception through sensory experiences. Her work
-          channels ancient folklore and myth-making into contemporary
-          technological spaces. By architecting fictional worlds that engage
-          multiple senses, she develops innovative interfaces between
-          technology, imagination, and embodied human experience.
+      <section
+        id="CONTACT"
+        ref={(el) => (sectionRefs.current["CONTACT"] = el)}
+        className="content-section"
+      >
+        <div className="bio-wrapper">
+          <div className="bio-text">
+            Emilija Povilanskaite is a visual artist and film director. Her work -
+            rooted in storytelling - is multifaceted, connecting technology,
+            science, research and olfactory design, exploring how digital worlds
+            reshape human perception through sensory experiences. Her work
+            channels ancient folklore and myth-making into contemporary
+            technological spaces. By architecting fictional worlds that engage
+            multiple senses, she develops innovative interfaces between
+            technology, imagination, and embodied human experience.
+          </div>
+          <img
+            src="/Ibbur 31.jpg"
+            alt="Emilija Portrait"
+            className="bio-image"
+          />
         </div>
-        <img src="/Ibbur 31.jpg" alt="Emilija Portrait" className="bio-image" />
-      </div>
-      <br />
-      <br />
 
-  {/* --- FORM IMPLEMENTATION --- */}
-  <h3>Request &amp; Purchase</h3>
+        <br />
+        <br />
 
-  <form
-    action="https://formspree.io/f/xnnezlde"
-    method="POST"
-    className="contact-form"
-  >
-    <label>
-      Name
-      <input type="text" name="name" required />
-    </label>
+        {/* --- FORM IMPLEMENTATION --- */}
+        <h3>Request &amp; Purchase</h3>
 
-    <label>
-      Email
-      <input type="email" name="email" required />
-    </label>
+        <form
+          action="https://formspree.io/f/xnnezlde" // ←ここはそのままでOK
+          method="POST"
+          className="contact-form"
+        >
+          <label>
+            Name
+            <input type="text" name="name" required />
+          </label>
 
-    <label>
-      Message
-      <textarea name="message" rows="4" required />
-    </label>
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
 
-    <button type="submit">Send</button>
-  </form>
-</section>
+          <label>
+            Message
+            <textarea name="message" rows="4" required></textarea>
+          </label>
+
+          <button type="submit">Send</button>
+        </form>
+      </section>
+
 
       <br />
       <br />

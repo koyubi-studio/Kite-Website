@@ -43,7 +43,10 @@ export default function App() {
   const sectionRefs = useRef({});
 
   // もし isMobile を Content 側で使ってるなら、ここで作って渡す
-  const [isMobile, setIsMobile] = useState(false);
+const [isMobile, setIsMobile] = useState(() => {
+  if (typeof window === "undefined") return false;
+  return window.innerWidth <= 768;
+});
   useEffect(() => {
     const update = () => setIsMobile(window.innerWidth <= 768);
     update();

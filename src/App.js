@@ -25,6 +25,22 @@ async function fetchKiteHome() {
   return json.story.content;
 }
 
+// --- Richtext を最小でHTMLにする関数 ---
+function renderRichText(richtext) {
+  if (!richtext || !richtext.content) return null;
+
+  return richtext.content.map((block, i) => {
+    if (block.type === "paragraph") {
+      return (
+        <p key={i}>
+          {block.content?.map((t, j) => t.text).join("")}
+        </p>
+      );
+    }
+    return null;
+  });
+}
+
 export default function App() {
   const [home, setHome] = useState(null);
   const [sbError, setSbError] = useState(null);
@@ -47,10 +63,34 @@ export default function App() {
         </div>
       )}
 
-      {/* デバッグ用：Storyblokの中身を丸ごと表示 */}
-      <div style={{ padding: 12, whiteSpace: "pre-wrap", fontSize: 12 }}>
-        {home ? JSON.stringify(home, null, 2) : "loading..."}
-      </div>
+      {/* Storyblok blocks を描画 */}
+      {home?.body?.map((block) => {
+        if (block.component === "rich_text_section") {
+          return (
+            <section key={block._uid} style={{ padding: "24px 0" }}>
+              {renderRichText(block.text)}
+            </section>
+          );
+        }
+
+        if (block.component === "image_section") {
+          return (
+            <section key={block._uid} style={{ padding: "24px 0" }}>
+              <img
+                src={block.image?.filename}
+                alt={block.caption || ""}
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  display: "block",
+                }}
+              />
+            </section>
+          );
+        }
+
+        return null;
+      })}
 
       {/* 既存コンポーネント */}
       <MagneticDangoLine />

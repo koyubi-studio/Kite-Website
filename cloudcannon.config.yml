@@ -1,11 +1,78 @@
+# 1. PATH CONFIGURATION
+# Changing 'uploads' to 'public' fixes the missing image previews.
 paths:
-  static: ''
-  uploads: uploads
+  static: public
+  uploads: public
+
+# 2. GLOBAL SETTINGS
 timezone: Asia/Tokyo
 markdown:
   engine: commonmark
   options: {}
+
+# 3. COLLECTIONS (Keep your existing settings)
 collections_config:
   public:
     path: public
     icon: public
+
+# 4. DATA CONFIGURATION
+# This connects the UI to your JSON file
+data_config:
+  content:
+    path: public/content.json
+
+# 5. INPUT CONFIGURATION
+# This turns text boxes into Image Uploaders and Text Areas
+_inputs:
+  # --- IMAGE FIELDS ---
+  main_image:
+    type: image
+  secondary_image:
+    type: image
+  extra_image:
+    type: image
+  notation_image:
+    type: image
+  bio_image:
+    type: image
+  
+  # --- ARRAYS OF IMAGES ---
+  # This handles the galleries so clients can add/remove images easily
+  gallery_images:
+    type: array
+    of:
+      type: image
+  header_images:
+    type: array
+    of:
+      type: image
+  comparison_images:
+    type: array
+    of:
+      type: image
+  gallery:
+    type: array
+    of:
+      type: image
+  gallery_vertical:
+    type: array
+    of:
+      type: image
+
+  # --- TEXT AREAS ---
+  # This makes the text boxes bigger for comfortable writing
+  text_1:
+    type: textarea
+  text_2:
+    type: textarea
+  text_3:
+    type: textarea
+  description:
+    type: textarea
+  intro_text:
+    type: textarea
+  bio_text:
+    type: textarea
+  materials:
+    type: textarea

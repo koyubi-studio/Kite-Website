@@ -1,0 +1,122 @@
+{
+  "about": {
+    "main_image": "/Main Image-min.png",
+    "text_1": "Kites began as a constellation of tools, using scent as both compass and archive, a way of entering atmospheres through fragrance. Among all our senses, scent remains one of the last signifiers of reality, cutting through mental abstractions to bring us back to presence. The process feels like a ritual: you give meaning to a fragrance, place it on your skin, and it becomes an embodied memory.",
+    "notation_image": "/NOTATION-3.jpg",
+    "text_2": "For me, scent became an anchor - a way to distill the essence of a story and re-enter its exact creative terrain. I think of each piece in terms of mood and sensory correspondence. Even elusive ideas reveal themselves through association. When writing a script set in a dance school, I build scents from a memory: dusty floors laced with resin and iris, sharp tang of hairspray in a changing room, metallic bite of barre railings, charged static of synthetic bodysuits. As the work deepened, so did the tools - scents for scenes, for characters, for the shifting undercurrents that shaped the artworks. Over time, an intricate library took shape: each fragrance preserving a world in suspension. What began as a private compass now feels like something to be shared - a map for others to wander, explore, and be caught by feeling they can’t quite name."
+  },
+  "scent": {
+    "main_image": "/Kites Bottle Scan 3.jpg",
+    "title": "STATIC ELECTRICITY",
+    "description": "Static Electricity is a moment caught mid-charge - the air just before lightning touches glass. In the split second before lightning strikes, the air changes - ions leap, and the sky tastes faintly metallic. Static Electricity captures the charged atmosphere: the crisp clarity of ionised air, softened by the grounding warmth of musk. Born from the same forces that arc through my high-voltage glass sculptures, it carries the sensation of energy held in suspension.",
+    "details": "wearable sculpture and unique polaroid, limited edition of 20",
+    "comparison_images": [
+      "/Weather-Scan-1.jpg",
+      "/Bottle-Composite-Dark-X_RAY-LARGE.jpg"
+    ]
+  },
+  "process": {
+    "text_1": "Each Kites vessel begins as a hand-drawn relief sketch, which is cast in molten glass. The pieces are produced in small batches, then carefully cooled, hand-engraved, and individually numbered.",
+    "text_2": "No two are ever identical — each bottle carries its own subtle variations in texture and light, making it a wearable sculpture as much as a fragrance vessel. Once filled, every bottle is sealed by hand with wax, completing the process.",
+    "text_3": "No two are alike - every piece is a wearable sculpture with its own play of light. Inside, I compose the fragrance from the finest raw materials, blended and bottled in-house.",
+    "gallery_images": [
+      "/Bottle-Scan-XRAY-Dropper.jpg",
+      "/raw_unsync.jpg",
+      "/Bottle-Composite-Dark-Flash.jpg"
+    ]
+  },
+  "studio": {
+    "header_images": [
+      "/Web Pola Scan 3X 3.jpg",
+      "/Web Pola Scan 3X 2.jpg",
+      "/Web Pola Scan 3X 1.jpg"
+    ],
+    "intro_text": "In each of my installations, scent is a hidden circuitry running through the work, binding glass, gas, metal and light into a single, charged atmosphere. Each piece holds its own microclimate: ozone sharpening the air around a rose, vegetal traces of grass and moss suspended in glass, notes that suggest downed power lines or the distant heat of a star.",
+    "projects": [
+      {
+        "title": "Helium Burning, 2023",
+        "materials": "glass, helium, krypton, metal, scent",
+        "location": "Museum of Modern Art Warsaw & Pulchri Studio, The Hague",
+        "description": "“Helium Burning” is a cinematic-sensory story, experienced through scent - as the Sun loses its Gravity (fire, smoke, ashes) and the Earth leaves its Orbit (soil, rain, atmosphere). Helium burning (glass, krypton, helium, metal) is the fusion of helium in the contracted core of a giant star at extremely high temperatures...",
+        "main_image": "/Web-Print 15.jpg",
+        "secondary_image": "/Pola Print 3.jpg",
+        "extra_image": "/Kites Draft Bottle 1.jpg"
+      },
+      {
+        "title": "Grass Render, 2023",
+        "materials": "Glass, krypton, argon, PLA, scent. with Clara Schweers",
+        "location": "Dutch Design Week, Eindhoven & Die Frappant gallery, Hamburg",
+        "description": "“Grass Render” (scent, lass, krypton, argon) uses sensory narrative to explore our entangled relationship with plants. The work suspends fragrances of grass, moss, wood and soil in glass vessels filled with krypton and argon, tracing the quiet magic of natural elements as they move into air.",
+        "main_image": "/Glass Render.jpeg"
+      },
+      {
+        "title": "Subsurface, 2025",
+        "materials": "glass, xenon, neon, argon, electrodes. with Clara Schweers",
+        "location": "Gallery “apiece”, Vilnius & Klaipeda Biennial, KCCC",
+        "description": "“Subsurface” (glass, neon, xenon, argon), operates as a living system, mirroring embryonic development, geological pressure and electrical circulation, and invites reflection on containment and exposure on the unseen forces that both nurture and protect.",
+        "main_image": "/Web-Print 13.jpg"
+      },
+      {
+        "title": "Satellites, 2025",
+        "materials": "with Jake Scott NOAA 19. weather satellite data direct downlink at 137.100 MHz",
+        "description": "Over the summer of 2025, final captures were made from the National Aeronautics Association’s three weather satellites NOAA-14, NOAA-15, and NOAA-19...",
+        "main_image": "/raw_sync 2.jpg"
+      },
+      {
+        "title": "O3, 2021",
+        "materials": "Electrical transformer, glass, real rose, Ozone scent",
+        "location": "winner of the Jury Special Prize and Public Choice Award. Contemporary Art Center, CAC - Vilnius",
+        "description": "“O3” is a molecule that eliminates other odours around, often used for air purification. However, when employed at a strong enough concentration...",
+        "gallery": [
+            "/Lightning Rose 1.jpg",
+            "/Lightning Rose 2.jpg",
+            "/Lightning Rose 3.jpg",
+            "/Lightning Rose 4.jpg"
+        ]
+      },
+      {
+        "title": "Ibbur, 2025",
+        "materials": "glass, helium, argon, metal. with Yuma Burgess",
+        "location": "Saatchi Gallery",
+        "description": "“Ibbur”, draws from Kabbalistic tradition, where ibbur - “impregnation” - names a benevolent possession in which an ancestor’s soul temporarily inhabits the living...",
+        "gallery": [
+            "/Ibbur 17.jpg",
+            "/Ibbur 18.jpg",
+            "/Ibbur 21.jpg",
+            "/Ibbur 24.jpg"
+        ]
+      },
+      {
+        "title": "Scented Trip, book & absolute 2019-2022",
+        "materials": "book and brugmansia absolute, 3ml",
+        "description": "This book and accompanying scent broach the topics of perception of authenticity and collective hallucinations...",
+        "gallery": [
+            "/web-scented_trip 2.jpg",
+            "/web-scented_trip 1.jpg",
+            "/Scented Trip.jpg",
+            "/Brugmancia RE.jpg"
+        ]
+      },
+      {
+        "title": "Sun’s surface, 2023",
+        "materials": "3D video, LCD screen, convex glass lens, stainless steel. with Jurgis Lietunovas",
+        "location": "Milan Design Week & Observatory of Ideas, Vilnius",
+        "main_image": "/SunsSurface-min.jpeg",
+        "gallery_vertical": [
+            "/Web-Pola-Scan-22.jpg",
+            "/Web-Pola-Scan-23.jpg",
+            "/Web-Print 4.jpg",
+            "/Web-Print 12.jpg",
+            "/web-conductive 1.jpg",
+            "/Lightning Rose RE.jpg",
+            "/Helium Burning CU RE.jpg"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "bio_text": "Emilija Povilanskaite is a visual artist and film director. Her work - rooted in storytelling - is multifaceted, connecting technology, science, research and olfactory design...",
+    "bio_image": "/Ibbur 31.jpg",
+    "form_action": "https://formspree.io/f/xnnezlde"
+  }
+}

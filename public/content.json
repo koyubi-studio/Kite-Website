@@ -1,9 +1,9 @@
 {
   "about": {
     "main_image": "/Main Image-min.png",
-    "text_1": "Kites began as a constellation of tools, using scent as both compass and archive, a way of entering atmospheres through fragrance. Among all our senses, scent remains one of the last signifiers of reality, cutting through mental abstractions to bring us back to presence. The process feels like a ritual: you give meaning to a fragrance, place it on your skin, and it becomes an embodied memory.",
+    "text_1": "TEST: Kites began as a constellation of tools, using scent as both compass and archive, a way of entering atmospheres through fragrance. Among all our senses, scent remains one of the last signifiers of reality, cutting through mental abstractions to bring us back to presence. The process feels like a ritual: you give meaning to a fragrance, place it on your skin, and it becomes an embodied memory.",
     "notation_image": "/NOTATION-3.jpg",
-    "text_2": "For me, scent became an anchor - a way to distill the essence of a story and re-enter its exact creative terrain. I think of each piece in terms of mood and sensory correspondence. Even elusive ideas reveal themselves through association. When writing a script set in a dance school, I build scents from a memory: dusty floors laced with resin and iris, sharp tang of hairspray in a changing room, metallic bite of barre railings, charged static of synthetic bodysuits. As the work deepened, so did the tools - scents for scenes, for characters, for the shifting undercurrents that shaped the artworks. Over time, an intricate library took shape: each fragrance preserving a world in suspension. What began as a private compass now feels like something to be shared - a map for others to wander, explore, and be caught by feeling they can’t quite name."
+    "text_2": "TEST: For me, scent became an anchor - a way to distill the essence of a story and re-enter its exact creative terrain. I think of each piece in terms of mood and sensory correspondence. Even elusive ideas reveal themselves through association. When writing a script set in a dance school, I build scents from a memory: dusty floors laced with resin and iris, sharp tang of hairspray in a changing room, metallic bite of barre railings, charged static of synthetic bodysuits. As the work deepened, so did the tools - scents for scenes, for characters, for the shifting undercurrents that shaped the artworks. Over time, an intricate library took shape: each fragrance preserving a world in suspension. What began as a private compass now feels like something to be shared - a map for others to wander, explore, and be caught by feeling they can’t quite name."
   },
   "scent": {
     "main_image": "/Kites Bottle Scan 3.jpg",
@@ -68,10 +68,10 @@
         "location": "winner of the Jury Special Prize and Public Choice Award. Contemporary Art Center, CAC - Vilnius",
         "description": "“O3” is a molecule that eliminates other odours around, often used for air purification. However, when employed at a strong enough concentration...",
         "gallery": [
-            "/Lightning Rose 1.jpg",
-            "/Lightning Rose 2.jpg",
-            "/Lightning Rose 3.jpg",
-            "/Lightning Rose 4.jpg"
+          "/Lightning Rose 1.jpg",
+          "/Lightning Rose 2.jpg",
+          "/Lightning Rose 3.jpg",
+          "/Lightning Rose 4.jpg"
         ]
       },
       {
@@ -80,10 +80,10 @@
         "location": "Saatchi Gallery",
         "description": "“Ibbur”, draws from Kabbalistic tradition, where ibbur - “impregnation” - names a benevolent possession in which an ancestor’s soul temporarily inhabits the living...",
         "gallery": [
-            "/Ibbur 17.jpg",
-            "/Ibbur 18.jpg",
-            "/Ibbur 21.jpg",
-            "/Ibbur 24.jpg"
+          "/Ibbur 17.jpg",
+          "/Ibbur 18.jpg",
+          "/Ibbur 21.jpg",
+          "/Ibbur 24.jpg"
         ]
       },
       {
@@ -91,10 +91,10 @@
         "materials": "book and brugmansia absolute, 3ml",
         "description": "This book and accompanying scent broach the topics of perception of authenticity and collective hallucinations...",
         "gallery": [
-            "/web-scented_trip 2.jpg",
-            "/web-scented_trip 1.jpg",
-            "/Scented Trip.jpg",
-            "/Brugmancia RE.jpg"
+          "/web-scented_trip 2.jpg",
+          "/web-scented_trip 1.jpg",
+          "/Scented Trip.jpg",
+          "/Brugmancia RE.jpg"
         ]
       },
       {
@@ -103,13 +103,13 @@
         "location": "Milan Design Week & Observatory of Ideas, Vilnius",
         "main_image": "/SunsSurface-min.jpeg",
         "gallery_vertical": [
-            "/Web-Pola-Scan-22.jpg",
-            "/Web-Pola-Scan-23.jpg",
-            "/Web-Print 4.jpg",
-            "/Web-Print 12.jpg",
-            "/web-conductive 1.jpg",
-            "/Lightning Rose RE.jpg",
-            "/Helium Burning CU RE.jpg"
+          "/Web-Pola-Scan-22.jpg",
+          "/Web-Pola-Scan-23.jpg",
+          "/Web-Print 4.jpg",
+          "/Web-Print 12.jpg",
+          "/web-conductive 1.jpg",
+          "/Lightning Rose RE.jpg",
+          "/Helium Burning CU RE.jpg"
         ]
       }
     ]

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MagneticDangoLine from "./MagneticDangoLine";
 
+// Storyblok から Home データを取得
 async function fetchKiteHome() {
   const token =
     (typeof import.meta !== "undefined" &&
@@ -38,10 +39,20 @@ export default function App() {
   }, []);
 
   return (
-<div style={{ padding: 12, whiteSpace: "pre-wrap", fontSize: 12 }}>
-  {home ? JSON.stringify(home, null, 2) : "loading..."}
-</div>
+    <div className="App">
+      {/* エラー表示 */}
+      {sbError && (
+        <div style={{ color: "red", padding: 12 }}>
+          Storyblok error: {sbError}
+        </div>
+      )}
 
+      {/* デバッグ用：Storyblokの中身を丸ごと表示 */}
+      <div style={{ padding: 12, whiteSpace: "pre-wrap", fontSize: 12 }}>
+        {home ? JSON.stringify(home, null, 2) : "loading..."}
+      </div>
+
+      {/* 既存コンポーネント */}
       <MagneticDangoLine />
     </div>
   );

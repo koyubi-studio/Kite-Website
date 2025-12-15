@@ -38,12 +38,9 @@ export default function App() {
   }, []);
 
   return (
-    <div className="App">
-      {sbError && <div>Storyblok error: {sbError}</div>}
-
-      <div style={{ padding: 12 }}>
-        {home?.body?.[0]?.headline || "loading..."}
-      </div>
+<div style={{ padding: 12, whiteSpace: "pre-wrap", fontSize: 12 }}>
+  {home ? JSON.stringify(home, null, 2) : "loading..."}
+</div>
 
       <MagneticDangoLine />
     </div>

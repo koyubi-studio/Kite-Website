@@ -1,78 +1,97 @@
-# 1. PATH CONFIGURATION
-# Changing 'uploads' to 'public' fixes the missing image previews.
 paths:
-  static: public
   uploads: public
-
-# 2. GLOBAL SETTINGS
-timezone: Asia/Tokyo
-markdown:
-  engine: commonmark
-  options: {}
-
-# 3. COLLECTIONS (Keep your existing settings)
+  static: public
 collections_config:
   public:
     path: public
-    icon: public
-
-# 4. DATA CONFIGURATION
-# This connects the UI to your JSON file
-data_config:
-  content:
-    path: public/content.json
-
-# 5. INPUT CONFIGURATION
-# This turns text boxes into Image Uploaders and Text Areas
+    name: Kites Website
+    icon:
+    disable_url: false
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
 _inputs:
-  # --- IMAGE FIELDS ---
   main_image:
     type: image
+    cascade: true
   secondary_image:
     type: image
+    cascade: true
   extra_image:
     type: image
+    cascade: true
   notation_image:
     type: image
+    cascade: true
   bio_image:
     type: image
-  
-  # --- ARRAYS OF IMAGES ---
-  # This handles the galleries so clients can add/remove images easily
+    cascade: true
   gallery_images:
     type: array
+    cascade: true
     of:
       type: image
   header_images:
     type: array
+    cascade: true
     of:
       type: image
   comparison_images:
     type: array
+    cascade: true
     of:
       type: image
   gallery:
     type: array
+    cascade: true
     of:
       type: image
   gallery_vertical:
     type: array
+    cascade: true
     of:
       type: image
-
-  # --- TEXT AREAS ---
-  # This makes the text boxes bigger for comfortable writing
   text_1:
     type: textarea
+    cascade: true
   text_2:
     type: textarea
+    cascade: true
   text_3:
     type: textarea
+    cascade: true
   description:
     type: textarea
+    cascade: true
   intro_text:
     type: textarea
+    cascade: true
   bio_text:
     type: textarea
+    cascade: true
   materials:
     type: textarea
+    cascade: true
+data_config:
+  content:
+    path: public/content.json
+timezone: Asia/Tokyo
+markdown:
+  engine: commonmark
+  options:
+    xhtml: false
+    breaks: false
+    linkify: false
+    typographer: false
+    spaced_lists: false
+    sentence_per_line: false
+    gfm: false
+    code_block_fences: '```'
+    escape_snippets_in_code_blocks: false
+    treat_indentation_as_code: false
+    table: false
+    strikethrough: false
+    subscript: false
+    superscript: false
+    heading_ids: false
+    attributes: false

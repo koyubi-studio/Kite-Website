@@ -1,3 +1,8 @@
+# PREVENT DELETION: This block protects your index.html
+source_editor:
+  ignore:
+    - public/index.html
+
 paths:
   uploads: public
   static: public

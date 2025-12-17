@@ -13,6 +13,9 @@ const HTMLText = ({ content, className = "" }) => {
 
 const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
   const [data, setData] = useState(null);
+  
+  // NEW: State to track form submission status (success, error, or empty)
+  const [formStatus, setFormStatus] = useState("");
 
   useEffect(() => {
     fetch("/content.json")
@@ -20,6 +23,36 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
       .then((jsonData) => setData(jsonData))
       .catch((err) => console.error("Failed to load content:", err));
   }, []);
+
+  // NEW: Function to handle form submission without redirecting
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Stop browser from redirecting
+    const form = event.target;
+    const formData = new FormData(form);
+
+    fetch(data.contact.form_action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        'Accept': 'application/json' // Tells Formspree to return JSON, not a page redirect
+      }
+    }).then(response => {
+      if (response.ok) {
+        setFormStatus("SUCCESS");
+        form.reset(); // Clear the input fields
+      } else {
+        response.json().then(data => {
+          if (Object.hasOwn(data, 'errors')) {
+            setFormStatus(data["errors"].map(error => error["message"]).join(", "));
+          } else {
+            setFormStatus("ERROR");
+          }
+        });
+      }
+    }).catch(error => {
+      setFormStatus("ERROR");
+    });
+  };
 
   if (!data) return <div style={{ padding: "50px" }}>Loading content...</div>;
 
@@ -176,7 +209,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         {/* Dynamic Project Rendering */}
         {data.studio.projects.map((project, index) => (
           <div key={index} className="project-block">
-            {/* Optional extra top image (like Helium Burning) */}
+            {/* Optional extra top image */}
             {project.extra_image && (
               <>
                 <img
@@ -198,12 +231,6 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
                     <br /> <br /> {project.location}
                   </>
                 )}
-                {/* Description inside caption block if needed */}
-                {project.description && !project.gallery && !project.gallery_vertical && (
-                   // If it's a simple layout, description might go here or below. 
-                   // Based on your original code, description is usually below the block.
-                   null
-                )}
               </div>
               
               {/* Single Main Image inside Caption Wrapper */}
@@ -215,7 +242,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
                 />
               )}
 
-              {/* Gallery Grid inside Caption Wrapper (like O3 or Ibbur) */}
+              {/* Gallery Grid inside Caption Wrapper */}
               {project.gallery && (
                 <div
                   className="caption-image"
@@ -241,7 +268,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
               )}
             </div>
 
-            {/* Secondary Image (like Helium Burning Pola Print) */}
+            {/* Secondary Image */}
             {project.secondary_image && (
                 <>
                 <br/>
@@ -261,7 +288,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
                 </p>
             )}
             
-            {/* Vertical Gallery (like Sun's Surface) */}
+            {/* Vertical Gallery */}
             {project.gallery_vertical && (
                 <>
                     <br/>
@@ -301,13 +328,12 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         <br />
         <br />
 
-        {/* --- FORM IMPLEMENTATION --- */}
+        {/* --- FORM IMPLEMENTATION (UPDATED) --- */}
         <div className="contact-block">
           <p className="contact-heading">Request &amp; Purchase</p>
 
           <form
-            action={data.contact.form_action}
-            method="POST"
+            onSubmit={handleSubmit}
             className="contact-form"
           >
             <label>
@@ -326,6 +352,20 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
             </label>
 
             <button type="submit">Send</button>
+
+            {/* Success Message */}
+            {formStatus === "SUCCESS" && (
+              <p style={{ marginTop: "1rem" }}>
+                Thank you!
+              </p>
+            )}
+
+            {/* Error Message */}
+            {formStatus === "ERROR" && (
+              <p style={{ marginTop: "1rem", color: "red" }}>
+                Oops! There was a problem submitting your form.
+              </p>
+            )}
           </form>
         </div>
       </section>

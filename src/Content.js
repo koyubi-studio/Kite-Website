@@ -26,6 +26,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
   const [showTurnstile, setShowTurnstile] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState("");
 
+  const turnstileSiteKey = process.env.REACT_APP_TURNSTILE_SITE_KEY;
   const turnstileContainerRef = useRef(null);
   const turnstileWidgetIdRef = useRef(null);
   const pendingFormDataRef = useRef(null);
@@ -67,7 +68,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         return;
       }
 
-      if (!process.env.REACT_APP_TURNSTILE_SITE_KEY) {
+      if (!turnstileSiteKey) {
         setFormStatus("TURNSTILE_CONFIG_ERROR");
         return;
       }
@@ -125,7 +126,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
           setFormStatus("ERROR");
         });
     },
-    [data?.contact?.form_action, turnstileReady, turnstileToken]
+    [data?.contact?.form_action, turnstileReady, turnstileToken, turnstileSiteKey]
   );
 
   useEffect(() => {
@@ -133,8 +134,8 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
       !turnstileReady ||
       !showTurnstile ||
       !turnstileContainerRef.current ||
-      turnstileWidgetIdRef.current ||
-      !process.env.REACT_APP_TURNSTILE_SITE_KEY
+          turnstileWidgetIdRef.current ||
+          !turnstileSiteKey
     ) {
       return;
     }
@@ -144,7 +145,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
     turnstileWidgetIdRef.current = window.turnstile.render(
       turnstileContainerRef.current,
       {
-        sitekey: process.env.REACT_APP_TURNSTILE_SITE_KEY,
+        sitekey: turnstileSiteKey,
         callback: (token) => {
           setTurnstileToken(token);
           if (pendingFormDataRef.current) {

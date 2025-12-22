@@ -1,4 +1,10 @@
-import React, { forwardRef, useState, useEffect } from "react";
+import React, {
+  forwardRef,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 
 // Helper component to render text with newlines/HTML safely
 const HTMLText = ({ content, className = "" }) => {
@@ -16,6 +22,15 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
   
   // NEW: State to track form submission status (success, error, or empty)
   const [formStatus, setFormStatus] = useState("");
+  const [turnstileReady, setTurnstileReady] = useState(false);
+  const [showTurnstile, setShowTurnstile] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+
+  const turnstileSiteKey = process.env.REACT_APP_TURNSTILE_SITE_KEY;
+  const turnstileContainerRef = useRef(null);
+  const turnstileWidgetIdRef = useRef(null);
+  const pendingFormDataRef = useRef(null);
+  const pendingFormRef = useRef(null);
 
   useEffect(() => {
     fetch("/content.json")
@@ -24,34 +39,138 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
       .catch((err) => console.error("Failed to load content:", err));
   }, []);
 
+  useEffect(() => {
+    if (window.turnstile) {
+      setTurnstileReady(true);
+      return undefined;
+    }
+
+    const script = document.createElement("script");
+    script.src =
+      "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => setTurnstileReady(true);
+    script.onerror = () => setFormStatus("ERROR");
+    document.body.appendChild(script);
+
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, []);
+
+  const submitFormData = useCallback(
+    (formData, formElement, tokenOverride) => {
+      if (!data?.contact?.form_action) {
+        setFormStatus("ERROR");
+        return;
+      }
+
+      if (!turnstileSiteKey) {
+        setFormStatus("TURNSTILE_CONFIG_ERROR");
+        return;
+      }
+
+      const tokenToUse = tokenOverride || turnstileToken;
+
+      if (!tokenToUse) {
+        pendingFormDataRef.current = formData;
+        pendingFormRef.current = formElement;
+        setShowTurnstile(true);
+        setFormStatus("AWAITING_CAPTCHA");
+
+        if (
+          turnstileReady &&
+          window.turnstile &&
+          turnstileWidgetIdRef.current
+        ) {
+          window.turnstile.reset(turnstileWidgetIdRef.current);
+        }
+        return;
+      }
+
+      formData.set("cf-turnstile-response", tokenToUse);
+      setFormStatus("SUBMITTING");
+
+      fetch(data.contact.form_action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json", // Tells Formspree to return JSON, not a page redirect
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            setFormStatus("SUCCESS");
+            formElement?.reset();
+            setTurnstileToken("");
+            setShowTurnstile(false);
+            if (window.turnstile && turnstileWidgetIdRef.current) {
+              window.turnstile.reset(turnstileWidgetIdRef.current);
+            }
+          } else {
+            response.json().then((body) => {
+              if (Object.hasOwn(body, "errors")) {
+                setFormStatus(
+                  body["errors"].map((error) => error["message"]).join(", ")
+                );
+              } else {
+                setFormStatus("ERROR");
+              }
+            });
+          }
+        })
+        .catch(() => {
+          setFormStatus("ERROR");
+        });
+    },
+    [data?.contact?.form_action, turnstileReady, turnstileToken, turnstileSiteKey]
+  );
+
+  useEffect(() => {
+    if (
+      !turnstileReady ||
+      !showTurnstile ||
+      !turnstileContainerRef.current ||
+          turnstileWidgetIdRef.current ||
+          !turnstileSiteKey
+    ) {
+      return;
+    }
+
+    if (!window.turnstile) return;
+
+    turnstileWidgetIdRef.current = window.turnstile.render(
+      turnstileContainerRef.current,
+      {
+        sitekey: turnstileSiteKey,
+        callback: (token) => {
+          setTurnstileToken(token);
+          if (pendingFormDataRef.current) {
+            submitFormData(
+              pendingFormDataRef.current,
+              pendingFormRef.current,
+              token
+            );
+            pendingFormDataRef.current = null;
+            pendingFormRef.current = null;
+          }
+        },
+        "expired-callback": () => setTurnstileToken(""),
+        "error-callback": () => setFormStatus("ERROR"),
+      }
+    );
+  }, [showTurnstile, submitFormData, turnstileReady]);
+
   // NEW: Function to handle form submission without redirecting
   const handleSubmit = (event) => {
     event.preventDefault(); // Stop browser from redirecting
     const form = event.target;
     const formData = new FormData(form);
 
-    fetch(data.contact.form_action, {
-      method: "POST",
-      body: formData,
-      headers: {
-        'Accept': 'application/json' // Tells Formspree to return JSON, not a page redirect
-      }
-    }).then(response => {
-      if (response.ok) {
-        setFormStatus("SUCCESS");
-        form.reset(); // Clear the input fields
-      } else {
-        response.json().then(data => {
-          if (Object.hasOwn(data, 'errors')) {
-            setFormStatus(data["errors"].map(error => error["message"]).join(", "));
-          } else {
-            setFormStatus("ERROR");
-          }
-        });
-      }
-    }).catch(error => {
-      setFormStatus("ERROR");
-    });
+    submitFormData(formData, form);
   };
 
   if (!data) return <div style={{ padding: "50px" }}>Loading content...</div>;
@@ -353,6 +472,12 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
 
             <button type="submit">Send</button>
 
+            {showTurnstile && (
+              <div style={{ marginTop: "1rem" }}>
+                <div ref={turnstileContainerRef} />
+              </div>
+            )}
+
             {/* Success Message */}
             {formStatus === "SUCCESS" && (
               <p style={{ marginTop: "1rem" }}>
@@ -365,6 +490,23 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
               <p style={{ marginTop: "1rem", color: "red" }}>
                 Oops! There was a problem submitting your form.
               </p>
+            )}
+
+            {formStatus === "TURNSTILE_CONFIG_ERROR" && (
+              <p style={{ marginTop: "1rem", color: "red" }}>
+                Missing Turnstile site key. Please set{" "}
+                <code>REACT_APP_TURNSTILE_SITE_KEY</code>.
+              </p>
+            )}
+
+            {formStatus === "AWAITING_CAPTCHA" && (
+              <p style={{ marginTop: "1rem" }}>
+                Please complete the Turnstile check to send your message.
+              </p>
+            )}
+
+            {formStatus === "SUBMITTING" && (
+              <p style={{ marginTop: "1rem" }}>Submitting...</p>
             )}
           </form>
         </div>

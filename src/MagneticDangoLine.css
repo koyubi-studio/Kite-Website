@@ -96,7 +96,7 @@ body {
   }
   .caption-text {
     position: absolute;
-    left: -80px;
+    left: clamp(-160px, -12vw, -80px);
     bottom: 0;
     width: 160px;
     margin: 0;

@@ -6,7 +6,6 @@ import React, {
   useCallback,
 } from "react";
 
-// Helper component to render text with newlines/HTML safely
 const HTMLText = ({ content, className = "" }) => {
   if (!content) return null;
   return (
@@ -19,8 +18,6 @@ const HTMLText = ({ content, className = "" }) => {
 
 const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
   const [data, setData] = useState(null);
-  
-  // NEW: State to track form submission status (success, error, or empty)
   const [formStatus, setFormStatus] = useState("");
   const [turnstileReady, setTurnstileReady] = useState(false);
   const [showTurnstile, setShowTurnstile] = useState(false);
@@ -44,16 +41,13 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
       setTurnstileReady(true);
       return undefined;
     }
-
     const script = document.createElement("script");
-    script.src =
-      "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
     script.async = true;
     script.defer = true;
     script.onload = () => setTurnstileReady(true);
     script.onerror = () => setFormStatus("ERROR");
     document.body.appendChild(script);
-
     return () => {
       if (script.parentNode) {
         script.parentNode.removeChild(script);
@@ -67,39 +61,27 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         setFormStatus("ERROR");
         return;
       }
-
       if (!turnstileSiteKey) {
         setFormStatus("TURNSTILE_CONFIG_ERROR");
         return;
       }
-
       const tokenToUse = tokenOverride || turnstileToken;
-
       if (!tokenToUse) {
         pendingFormDataRef.current = formData;
         pendingFormRef.current = formElement;
         setShowTurnstile(true);
         setFormStatus("AWAITING_CAPTCHA");
-
-        if (
-          turnstileReady &&
-          window.turnstile &&
-          turnstileWidgetIdRef.current
-        ) {
+        if (turnstileReady && window.turnstile && turnstileWidgetIdRef.current) {
           window.turnstile.reset(turnstileWidgetIdRef.current);
         }
         return;
       }
-
       formData.set("cf-turnstile-response", tokenToUse);
       setFormStatus("SUBMITTING");
-
       fetch(data.contact.form_action, {
         method: "POST",
         body: formData,
-        headers: {
-          Accept: "application/json", // Tells Formspree to return JSON, not a page redirect
-        },
+        headers: { Accept: "application/json" },
       })
         .then((response) => {
           if (response.ok) {
@@ -112,36 +94,18 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
             }
           } else {
             response.json().then((body) => {
-              if (Object.hasOwn(body, "errors")) {
-                setFormStatus(
-                  body["errors"].map((error) => error["message"]).join(", ")
-                );
-              } else {
-                setFormStatus("ERROR");
-              }
+              setFormStatus(Object.hasOwn(body, "errors") ? body["errors"].map((error) => error["message"]).join(", ") : "ERROR");
             });
           }
         })
-        .catch(() => {
-          setFormStatus("ERROR");
-        });
+        .catch(() => setFormStatus("ERROR"));
     },
     [data?.contact?.form_action, turnstileReady, turnstileToken, turnstileSiteKey]
   );
 
   useEffect(() => {
-    if (
-      !turnstileReady ||
-      !showTurnstile ||
-      !turnstileContainerRef.current ||
-          turnstileWidgetIdRef.current ||
-          !turnstileSiteKey
-    ) {
-      return;
-    }
-
+    if (!turnstileReady || !showTurnstile || !turnstileContainerRef.current || turnstileWidgetIdRef.current || !turnstileSiteKey) return;
     if (!window.turnstile) return;
-
     turnstileWidgetIdRef.current = window.turnstile.render(
       turnstileContainerRef.current,
       {
@@ -149,11 +113,7 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         callback: (token) => {
           setTurnstileToken(token);
           if (pendingFormDataRef.current) {
-            submitFormData(
-              pendingFormDataRef.current,
-              pendingFormRef.current,
-              token
-            );
+            submitFormData(pendingFormDataRef.current, pendingFormRef.current, token);
             pendingFormDataRef.current = null;
             pendingFormRef.current = null;
           }
@@ -162,15 +122,11 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
         "error-callback": () => setFormStatus("ERROR"),
       }
     );
-  }, [showTurnstile, submitFormData, turnstileReady]);
+  }, [showTurnstile, submitFormData, turnstileReady, turnstileSiteKey]);
 
-  // NEW: Function to handle form submission without redirecting
   const handleSubmit = (event) => {
-    event.preventDefault(); // Stop browser from redirecting
-    const form = event.target;
-    const formData = new FormData(form);
-
-    submitFormData(formData, form);
+    event.preventDefault();
+    submitFormData(new FormData(event.target), event.target);
   };
 
   if (!data) return <div style={{ padding: "50px" }}>Loading content...</div>;
@@ -178,343 +134,113 @@ const Content = forwardRef(({ isMobile, sectionRefs }, ref) => {
   return (
     <div ref={ref}>
       {/* --- ABOUT SECTION --- */}
-      <p
-        id="ABOUT"
-        ref={(el) => (sectionRefs.current["ABOUT"] = el)}
-        className="content-section"
-      >
-        <img
-          src={data.about.main_image}
-          alt="About Main"
-          style={{
-            width: isMobile ? "100%" : "50%",
-            height: "auto",
-            display: "block",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        />
-        <br />
-        <br />
-        <br />
+      <div id="ABOUT" ref={(el) => (sectionRefs.current["ABOUT"] = el)} className="content-section">
+        <img src={data.about.main_image} alt="About Main" style={{ width: isMobile ? "100%" : "50%", height: "auto", display: "block", marginLeft: "auto", marginRight: "auto" }} />
+        <br /><br /><br />
         <HTMLText content={data.about.text_1} />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <img
-          src={data.about.notation_image}
-          alt="Notation Art"
-          className="large-image"
-        />
-        <br />
-        <br />
+        <br /><br /><br /><br /><br /><br />
+        <img src={data.about.notation_image} alt="Notation Art" className="large-image" />
+        <br /><br />
         <HTMLText content={data.about.text_2} />
-        <br />
-        <br />
-        <br />
-      </p>
+      </div>
 
       {/* --- SCENT SECTION --- */}
-      <p
-        id="SCENT"
-        ref={(el) => (sectionRefs.current["SCENT"] = el)}
-        className="content-section"
-      >
-        <img
-          src={data.scent.main_image}
-          alt="Scent Main"
-          className="large-image"
-        />
-        <br />
-        <br />
-        {data.scent.title} <br />
-        <br />
+      <div id="SCENT" ref={(el) => (sectionRefs.current["SCENT"] = el)} className="content-section">
+        <img src={data.scent.main_image} alt="Scent Main" className="large-image" />
+        <br /><br />
+        {data.scent.title} <br /><br />
         <HTMLText content={data.scent.description} />
         <br />
         <span className="special-font">{data.scent.details}</span>
-      </p>
-      <br />
-      <br />
-      <br />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          width: "100%",
-          marginTop: "20px",
-          marginBottom: "20px",
-        }}
-      >
-        {data.scent.comparison_images && (
-          <>
-            <img
-              src={data.scent.comparison_images[0]}
-              alt="Weather Scan"
-              style={{ width: "52%", height: "auto", display: "block" }}
-            />
-            <img
-              src={data.scent.comparison_images[1]}
-              alt="Bottle X-Ray"
-              style={{ width: "44%", height: "auto", display: "block" }}
-            />
-          </>
-        )}
+        
+        <div className="responsive-grid">
+          {data.scent.comparison_images && (
+            <>
+              <img src={data.scent.comparison_images[0]} alt="Weather Scan" style={{ width: "52%", height: "auto" }} />
+              <img src={data.scent.comparison_images[1]} alt="Bottle X-Ray" style={{ width: "44%", height: "auto" }} />
+            </>
+          )}
+        </div>
       </div>
 
       {/* --- PROCESS SECTION --- */}
-      <p
-        id="PROCESS"
-        ref={(el) => (sectionRefs.current["PROCESS"] = el)}
-        className="content-section"
-      >
-        <HTMLText content={data.process.text_1} />
-        <br />
-        <br />
-        <HTMLText content={data.process.text_2} />
-        <br />
-        <br />
+      <div id="PROCESS" ref={(el) => (sectionRefs.current["PROCESS"] = el)} className="content-section">
+        <HTMLText content={data.process.text_1} /><br /><br />
+        <HTMLText content={data.process.text_2} /><br /><br />
         <HTMLText content={data.process.text_3} />
-      </p>
-      <br />
-      <br />
-      {data.process.gallery_images.map((imgSrc, index) => (
-        <React.Fragment key={index}>
-          <img
-            src={imgSrc}
-            alt={`Process ${index}`}
-            className="responsive-image"
-          />
-          <br />
-        </React.Fragment>
-      ))}
+        <br /><br />
+        {data.process.gallery_images.map((imgSrc, index) => (
+          <img key={index} src={imgSrc} alt={`Process ${index}`} className="responsive-image" style={{marginBottom: '20px'}} />
+        ))}
+      </div>
 
-      {/* --- STUDIO SECTION (PROJECTS) --- */}
-      <div
-        id="STUDIO"
-        ref={(el) => (sectionRefs.current["STUDIO"] = el)}
-        className="content-section"
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            width: "100%",
-            marginTop: "20px",
-            marginBottom: "20px",
-          }}
-        >
+      {/* --- STUDIO SECTION --- */}
+      <div id="STUDIO" ref={(el) => (sectionRefs.current["STUDIO"] = el)} className="content-section">
+        <div className="responsive-grid">
           {data.studio.header_images.map((img, i) => (
-            <img
-              key={i}
-              src={img}
-              alt="Pola Scan"
-              style={{ width: "31%", height: "auto", display: "block" }}
-            />
+            <img key={i} src={img} alt="Pola Scan" style={{ width: "31%", height: "auto" }} />
           ))}
         </div>
-        <br />
-        <br />
-        <p><HTMLText content={data.studio.intro_text} /></p>
-        <br />
-        <br />
+        <HTMLText content={data.studio.intro_text} />
+        <br /><br />
 
-        {/* Dynamic Project Rendering */}
         {data.studio.projects.map((project, index) => (
           <div key={index} className="project-block">
-            {/* Optional extra top image */}
-            {project.extra_image && (
-              <>
-                <img
-                  src={project.extra_image}
-                  alt={project.title}
-                  className="responsive-image"
-                />
-                <br />
-              </>
-            )}
-
+            {project.extra_image && <img src={project.extra_image} alt={project.title} className="responsive-image" />}
+            
             <div className="caption-wrapper">
               <div className="caption-text">
-                <strong>{project.title}</strong> <br />
-                <br />
+                <strong>{project.title}</strong><br /><br />
                 <HTMLText content={project.materials} />
-                {project.location && (
-                  <>
-                    <br /> <br /> {project.location}
-                  </>
-                )}
+                {project.location && <><br /><br />{project.location}</>}
               </div>
-              
-              {/* Single Main Image inside Caption Wrapper */}
-              {project.main_image && (
-                <img
-                  src={project.main_image}
-                  alt={project.title}
-                  className="caption-image"
-                />
-              )}
-
-              {/* Gallery Grid inside Caption Wrapper */}
+              {project.main_image && <img src={project.main_image} alt={project.title} className="caption-image" />}
               {project.gallery && (
-                <div
-                  className="caption-image"
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "space-between",
-                  }}
-                >
+                <div className="caption-image" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
                   {project.gallery.map((gImg, gIndex) => (
-                    <img
-                      key={gIndex}
-                      src={gImg}
-                      alt={`${project.title} ${gIndex}`}
-                      style={{
-                        width: "48%",
-                        marginBottom: "10px",
-                        display: "block",
-                      }}
-                    />
+                    <img key={gIndex} src={gImg} alt={`${project.title} ${gIndex}`} style={{ width: "48%", marginBottom: "10px" }} />
                   ))}
                 </div>
               )}
             </div>
 
-            {/* Secondary Image */}
             {project.secondary_image && (
-                <>
-                <br/>
-                <div className="caption-wrapper">
-                    <div className="caption-text">
-                        {project.location}
-                    </div>
-                    <img src={project.secondary_image} className="responsive-image" alt="Secondary" />
-                </div>
-                </>
+              <div className="caption-wrapper">
+                <div className="caption-text">{project.location}</div>
+                <img src={project.secondary_image} className="responsive-image" alt="Secondary" />
+              </div>
             )}
-
             <br />
-            {project.description && (
-                <p>
-                    <HTMLText content={project.description} />
-                </p>
-            )}
-            
-            {/* Vertical Gallery */}
-            {project.gallery_vertical && (
-                <>
-                    <br/>
-                    {project.gallery_vertical.map((vImg, vIndex) => (
-                        <React.Fragment key={vIndex}>
-                            <img src={vImg} className="responsive-image" alt="Detail" />
-                            <br/>
-                        </React.Fragment>
-                    ))}
-                </>
-            )}
-
-            <br />
-            <br />
-            <br />
+            {project.description && <p><HTMLText content={project.description} /></p>}
+            {project.gallery_vertical && project.gallery_vertical.map((vImg, vIndex) => (
+              <img key={vIndex} src={vImg} className="responsive-image" alt="Detail" style={{marginBottom: '20px'}} />
+            ))}
           </div>
         ))}
       </div>
 
       {/* --- CONTACT SECTION --- */}
-      <section
-        id="CONTACT"
-        ref={(el) => (sectionRefs.current["CONTACT"] = el)}
-        className="content-section"
-      >
+      <section id="CONTACT" ref={(el) => (sectionRefs.current["CONTACT"] = el)} className="content-section">
         <div className="bio-wrapper">
           <div className="bio-text">
             <HTMLText content={data.contact.bio_text} />
           </div>
-          <img
-            src={data.contact.bio_image}
-            alt="Bio"
-            className="bio-image"
-          />
+          <img src={data.contact.bio_image} alt="Bio" className="bio-image" />
         </div>
 
-        <br />
-        <br />
-
-        {/* --- FORM IMPLEMENTATION (UPDATED) --- */}
         <div className="contact-block">
           <p className="contact-heading">Request &amp; Purchase</p>
-
-          <form
-            onSubmit={handleSubmit}
-            className="contact-form"
-          >
-            <label>
-              Name
-              <input type="text" name="name" required />
-            </label>
-
-            <label>
-              Email
-              <input type="email" name="email" required />
-            </label>
-
-            <label>
-              Message
-              <textarea name="message" rows="4" required></textarea>
-            </label>
-
+          <form onSubmit={handleSubmit} className="contact-form">
+            <label>Name <input type="text" name="name" required /></label>
+            <label>Email <input type="email" name="email" required /></label>
+            <label>Message <textarea name="message" rows="4" required></textarea></label>
             <button type="submit">Send</button>
-
-            {showTurnstile && (
-              <div style={{ marginTop: "1rem" }}>
-                <div ref={turnstileContainerRef} />
-              </div>
-            )}
-
-            {/* Success Message */}
-            {formStatus === "SUCCESS" && (
-              <p style={{ marginTop: "1rem" }}>
-                Thank you!
-              </p>
-            )}
-
-            {/* Error Message */}
-            {formStatus === "ERROR" && (
-              <p style={{ marginTop: "1rem", color: "red" }}>
-                Oops! There was a problem submitting your form.
-              </p>
-            )}
-
-            {formStatus === "TURNSTILE_CONFIG_ERROR" && (
-              <p style={{ marginTop: "1rem", color: "red" }}>
-                Missing Turnstile site key. Please set{" "}
-                <code>REACT_APP_TURNSTILE_SITE_KEY</code>.
-              </p>
-            )}
-
-            {formStatus === "AWAITING_CAPTCHA" && (
-              <p style={{ marginTop: "1rem" }}>
-                Please complete the Turnstile check to send your message.
-              </p>
-            )}
-
-            {formStatus === "SUBMITTING" && (
-              <p style={{ marginTop: "1rem" }}>Submitting...</p>
-            )}
+            {showTurnstile && <div style={{ marginTop: "1rem" }}><div ref={turnstileContainerRef} /></div>}
+            {formStatus === "SUCCESS" && <p style={{ marginTop: "1rem" }}>Thank you!</p>}
+            {formStatus === "ERROR" && <p style={{ marginTop: "1rem", color: "red" }}>Oops! There was a problem.</p>}
           </form>
         </div>
       </section>
-
-      <br />
-      <br />
-      <br />
     </div>
   );
 });

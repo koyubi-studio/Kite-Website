@@ -416,27 +416,27 @@ export default function MagneticDangoLine() {
     calculateLayout();
   }, [windowSize, decorativeLineYPixels, isMobile]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { root: scrollRef.current, rootMargin: "0px 0px -80% 0px", threshold: 0 }
-    );
+  const updateActiveSection = (scrollTopValue) => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+    const scrollOffset = scrollTopValue + scrollContainer.clientHeight * 0.3;
+    let currentSection = BUTTON_LABELS[0];
+
     BUTTON_LABELS.forEach((label) => {
       const section = sectionRefs.current[label];
-      if (section) observer.observe(section);
+      if (section && section.offsetTop <= scrollOffset) {
+        currentSection = label;
+      }
     });
-    return () => {
-      BUTTON_LABELS.forEach((label) => {
-        const section = sectionRefs.current[label];
-        if (section) observer.unobserve(section);
-      });
-    };
+
+    if (currentSection !== activeSection) {
+      setActiveSection(currentSection);
+    }
+  };
+
+  useEffect(() => {
+    if (!scrollRef.current) return;
+    updateActiveSection(scrollRef.current.scrollTop);
   }, [leftElements]);
 
   useAnimationFrame(() => {
@@ -658,6 +658,7 @@ export default function MagneticDangoLine() {
   const handleScroll = (e) => {
     const scrollTopValue = e.target.scrollTop;
     setScrollTop(scrollTopValue);
+    updateActiveSection(scrollTopValue);
   };
 
   const handleNavClick = (sectionId) => {

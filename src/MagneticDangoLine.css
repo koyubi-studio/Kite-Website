@@ -27,6 +27,7 @@ body {
 .scrollable-text-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overflow-x: visible;
 }
 .scrollable-text-container::-webkit-scrollbar {
   display: none;
@@ -96,7 +97,7 @@ body {
   }
   .caption-text {
     position: absolute;
-    left: clamp(-160px, -12vw, -80px);
+    left: calc(50% - 380px);
     bottom: 0;
     width: 160px;
     margin: 0;

@@ -4,10 +4,10 @@ import Content from "./Content"; // Importing your content
 import "./MagneticDangoLine.css"; // Importing your styles
 
 // --- CONSTANTS ---
-const DESKTOP_NAV_LOGO_X_POSITION = 200;
+const DESKTOP_NAV_LOGO_X_POSITION = 0;
 const DESKTOP_PARAGRAPH_RIGHT_OFFSET_VW = 10;
 const DESKTOP_PARAGRAPH_WIDTH_VW = 55;
-const MOBILE_NAV_LOGO_X_POSITION = 30;
+const MOBILE_NAV_LOGO_X_POSITION = 0;
 const MOBILE_PARAGRAPH_RIGHT_OFFSET_VW = 0;
 const MOBILE_PARAGRAPH_WIDTH_VW = 65;
 const STROKE_WIDTH = 0.5;
@@ -341,10 +341,9 @@ export default function MagneticDangoLine() {
         const navWidth = 120;
         const safetyGap = 50;
         const maxNavX = paragraphLeftEdgePx - navWidth - safetyGap;
-        if (calculatedNavX > maxNavX) {
-          calculatedNavX = Math.max(20, maxNavX);
-        }
+        calculatedNavX = Math.min(calculatedNavX, maxNavX);
       }
+      calculatedNavX = Math.max(MOBILE_NAV_LOGO_X_POSITION, calculatedNavX);
 
       setNavXPosition(calculatedNavX);
       const leftElementXStart = calculatedNavX;

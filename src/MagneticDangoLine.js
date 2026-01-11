@@ -5,11 +5,13 @@ import "./MagneticDangoLine.css"; // Importing your styles
 
 // --- CONSTANTS ---
 const DESKTOP_NAV_LOGO_X_POSITION = 200;
+const DESKTOP_NAV_LOGO_SHIFT_START = 1200;
 const DESKTOP_PARAGRAPH_RIGHT_OFFSET_VW = 10;
 const DESKTOP_PARAGRAPH_WIDTH_VW = 55;
 const MOBILE_NAV_LOGO_X_POSITION = 30;
 const MOBILE_PARAGRAPH_RIGHT_OFFSET_VW = 0;
 const MOBILE_PARAGRAPH_WIDTH_VW = 65;
+const NAV_LOGO_SHIFT_END = 770;
 const STROKE_WIDTH = 0.5;
 const VISCOUS_LERP_SPEED = 0.08;
 const DRAG_LERP_SPEED = 0.04;
@@ -330,9 +332,19 @@ export default function MagneticDangoLine() {
       }));
       setRightDecorativeLines(rightLines);
 
-      let calculatedNavX = isMobile
-        ? MOBILE_NAV_LOGO_X_POSITION
-        : DESKTOP_NAV_LOGO_X_POSITION;
+      const navShiftProgress = Math.min(
+        1,
+        Math.max(
+          0,
+          (vw - NAV_LOGO_SHIFT_END) /
+            (DESKTOP_NAV_LOGO_SHIFT_START - NAV_LOGO_SHIFT_END)
+        )
+      );
+      let calculatedNavX = lerp(
+        MOBILE_NAV_LOGO_X_POSITION,
+        DESKTOP_NAV_LOGO_X_POSITION,
+        navShiftProgress
+      );
       if (!isMobile) {
         const totalParagraphSpaceVW =
           DESKTOP_PARAGRAPH_WIDTH_VW + DESKTOP_PARAGRAPH_RIGHT_OFFSET_VW;
@@ -341,10 +353,9 @@ export default function MagneticDangoLine() {
         const navWidth = 120;
         const safetyGap = 50;
         const maxNavX = paragraphLeftEdgePx - navWidth - safetyGap;
-        if (calculatedNavX > maxNavX) {
-          calculatedNavX = Math.max(20, maxNavX);
-        }
+        calculatedNavX = Math.min(calculatedNavX, maxNavX);
       }
+      calculatedNavX = Math.max(MOBILE_NAV_LOGO_X_POSITION, calculatedNavX);
 
       setNavXPosition(calculatedNavX);
       const leftElementXStart = calculatedNavX;

@@ -1,3 +1,8 @@
+/* 1. Global Reset - Prevents padding/borders from breaking widths */
+* {
+  box-sizing: border-box;
+}
+
 @font-face {
   font-family: "Victor Mono Medium";
   src: url('./fonts/VictorMono-Medium.woff') format('woff');
@@ -18,25 +23,29 @@
 /* Wrappers for Bio and Project Captions */
 .caption-wrapper, .bio-wrapper {
   display: flex;
-  flex-direction: row; /* Horizontal by default */
+  flex-direction: row; /* Side-by-side on desktop */
+  flex-wrap: wrap;     /* Allows items to move to next line if they run out of space */
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  gap: 40px; /* Space between text and image */
+  gap: 40px; 
   margin-top: 20px;
   margin-bottom: 20px;
+  height: auto;        /* Ensures container grows with content */
 }
 
 .caption-text, .bio-text {
   flex: 1;
-  min-width: 300px;
+  min-width: 300px;    /* Helps prevent text from becoming a tiny vertical sliver */
+  position: relative;  /* Resets any absolute positioning */
 }
 
 .caption-image, .bio-image {
-  flex: 0 0 45%; /* Image takes 45% of width */
+  flex: 0 0 45%;      /* Image takes 45% of width on desktop */
   max-width: 600px;
   height: auto;
   display: block;
+  object-fit: contain;
 }
 
 /* Grid for comparison/header images */
@@ -47,7 +56,7 @@
   align-items: flex-start;
   width: 100%;
   margin: 20px 0;
-  gap: 2%;
+  gap: 20px;
 }
 
 /* Base image behavior */
@@ -57,21 +66,37 @@
   display: block;
 }
 
-/* --- THE "GAP" FIX (1000px - 1300px) --- */
-@media (max-width: 1200px) {
-  .caption-wrapper, .bio-wrapper, .responsive-grid {
-    flex-direction: column !important; /* Force stack */
-    gap: 20px;
+/* --- MOBILE & TABLET FIXES --- */
+/* We trigger this at 1100px to prevent the "collision" phase */
+@media (max-width: 1100px) {
+  .caption-wrapper, .bio-wrapper {
+    flex-direction: column !important; /* Forces vertical stack */
+    gap: 15px;
   }
 
-  .caption-image, .bio-image, .responsive-grid img {
-    width: 100% !important; /* Images take full width when stacked */
+  /* Make sure the image is always on top when stacked */
+  .caption-image, .bio-image {
+    width: 100% !important;
+    max-width: 100%;
     flex: none;
+    order: 1; /* Moves image to top */
+  }
+
+  .caption-text, .bio-text {
+    width: 100% !important;
+    min-width: 0;
+    flex: none;
+    order: 2; /* Moves text below image */
+    margin-top: 10px;
+  }
+
+  .responsive-grid {
+    flex-direction: column;
+    gap: 20px;
   }
   
-  .caption-text, .bio-text {
-    width: 100%;
-    min-width: 0;
+  .responsive-grid img {
+    width: 100% !important;
   }
 }
 

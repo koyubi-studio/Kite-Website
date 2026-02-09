@@ -1,8 +1,3 @@
-/* 1. Global Reset - Prevents padding/borders from breaking widths */
-* {
-  box-sizing: border-box;
-}
-
 @font-face {
   font-family: "Victor Mono Medium";
   src: url('./fonts/VictorMono-Medium.woff') format('woff');
@@ -14,7 +9,6 @@
 
 /* --- RESPONSIVE LAYOUT FIXES --- */
 
-/* Standard section spacing */
 .content-section {
   width: 100%;
   margin-bottom: 60px;
@@ -23,29 +17,47 @@
 /* Wrappers for Bio and Project Captions */
 .caption-wrapper, .bio-wrapper {
   display: flex;
-  flex-direction: row; /* Side-by-side on desktop */
-  flex-wrap: wrap;     /* Allows items to move to next line if they run out of space */
+  flex-direction: row; 
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
   gap: 40px; 
   margin-top: 20px;
   margin-bottom: 20px;
-  height: auto;        /* Ensures container grows with content */
 }
 
+/* --- FLUID CAPTION LOGIC (1301px to 1775px) --- */
 .caption-text, .bio-text {
-  flex: 1;
-  min-width: 300px;    /* Helps prevent text from becoming a tiny vertical sliver */
-  position: relative;  /* Resets any absolute positioning */
+  /* This formula makes the text exactly 145px when the screen is 1300px 
+     and grows at a rate that hits ~230px at 1600px wide. */
+  width: calc(145px + (100vw - 1300px) * 0.28); 
+  flex: none; /* Stops the text from trying to "fill" the screen and hitting the image */
 }
 
 .caption-image, .bio-image {
-  flex: 0 0 45%;      /* Image takes 45% of width on desktop */
+  flex: 0 0 45%; 
   max-width: 600px;
   height: auto;
   display: block;
-  object-fit: contain;
+}
+
+/* --- MOBILE VIEW (Now triggers at 1300px) --- */
+@media (max-width: 1300px) {
+  .caption-wrapper, .bio-wrapper, .responsive-grid {
+    flex-direction: column !important; 
+    gap: 20px;
+  }
+
+  .caption-image, .bio-image, .responsive-grid img {
+    width: 100% !important; 
+    max-width: 100%;
+    flex: none;
+  }
+  
+  .caption-text, .bio-text {
+    width: 100% !important; /* On mobile, text takes full width below image */
+    min-width: 0;
+  }
 }
 
 /* Grid for comparison/header images */
@@ -56,48 +68,13 @@
   align-items: flex-start;
   width: 100%;
   margin: 20px 0;
-  gap: 20px;
+  gap: 2%;
 }
 
-/* Base image behavior */
 .responsive-image, .large-image {
   max-width: 100%;
   height: auto;
   display: block;
-}
-
-/* --- MOBILE & TABLET FIXES --- */
-/* We trigger this at 1100px to prevent the "collision" phase */
-@media (max-width: 1100px) {
-  .caption-wrapper, .bio-wrapper {
-    flex-direction: column !important; /* Forces vertical stack */
-    gap: 15px;
-  }
-
-  /* Make sure the image is always on top when stacked */
-  .caption-image, .bio-image {
-    width: 100% !important;
-    max-width: 100%;
-    flex: none;
-    order: 1; /* Moves image to top */
-  }
-
-  .caption-text, .bio-text {
-    width: 100% !important;
-    min-width: 0;
-    flex: none;
-    order: 2; /* Moves text below image */
-    margin-top: 10px;
-  }
-
-  .responsive-grid {
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .responsive-grid img {
-    width: 100% !important;
-  }
 }
 
 /* --- FORM STYLING --- */
